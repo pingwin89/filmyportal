@@ -1,0 +1,21 @@
+{% extends 'glowny.html' %}
+{% load bootstrap %}
+
+{% block tytul %} Lista filmów {% endblock %}
+
+{% block strona %}
+
+<div class="container">
+    <div class="card" style="width: 20rem;">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-user"></i> Zaloguj się</h5>
+            <form method="post">
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                <button type="submit" class="btn btn-primary">Zaloguj <i class="fas fa-sign-in-alt"></i></button>
+            </form>
+      </div>
+    </div>
+</div>
+
+{% endblock %}

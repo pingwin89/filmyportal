@@ -1,0 +1,59 @@
+{% extends 'glowny.html' %}
+{% load bootstrap %}
+{% block tytul %} Film form {% endblock %}
+
+{% block strona %}
+
+    <div class="container">
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">
+                    {%  if czy_nowy %}
+                        Dodaj film
+                    {% else %}
+                        Edytuj film
+                    {% endif %}
+                </h5>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form|bootstrap }}
+                    {{ form_dodatkowe|bootstrap }}
+                    <button type="submit" class="btn btn-primary">
+                        {%  if czy_nowy %}
+                            Dodaj film
+                        {% else %}
+                            Edytuj film
+                        {% endif %}
+                    </button>
+                </form>
+                <a href="{% url 'wszystkie_filmy' %}">Cofnij</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Oceń film</h5>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form_ocena|bootstrap }}
+                    <button type="submit" class="btn btn-primary">Oceń</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+<hr>
+{% for ocena in oceny %}
+    <h4>Gwiazdki: {{ ocena.gwiazdki }}</h4>
+    <h4>Gwiazdki: {{ ocena.opis }} </h4>
+<hr>
+{% endfor %}
+
+<h3>Aktorzy: </h3>
+{% for aktor in aktorzy %}
+    <p> {{ aktor.imie }} {{ aktor.nazwisko }} </p>
+{% endfor %}
+
+{% endblock %}
